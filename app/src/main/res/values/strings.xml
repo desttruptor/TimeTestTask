@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">TimeTestTask</string>
+    <string name="bishkek">Бишкек</string>
+    <string name="belgrade">Белград</string>
+    <string name="berlin">Берлин</string>
+    <string name="ottawa">Ottawa</string>
+    <string name="johannesburg">Johannesburg</string>
 </resources>

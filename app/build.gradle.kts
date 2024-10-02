@@ -1,6 +1,10 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.hilt.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.serialization)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -40,7 +44,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.14"
     }
     packaging {
         resources {
@@ -50,15 +54,29 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.viewmodel.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+
+    implementation(libs.hilt.android)
+    implementation(libs.hilt.navigation.compose)
+    implementation(libs.androidx.ui.text.google.fonts)
+    kapt(libs.hilt.compiler)
+    implementation(libs.coroutines.core)
+    implementation(libs.coroutines.android)
+    implementation(libs.ktor.client.core)
+    implementation(libs.ktor.client.android)
+    implementation(libs.ktor.client.negotiation)
+    implementation(libs.ktor.serialization.json)
+    implementation(libs.kotlin.serialization)
+    implementation(libs.datastore.preferences)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

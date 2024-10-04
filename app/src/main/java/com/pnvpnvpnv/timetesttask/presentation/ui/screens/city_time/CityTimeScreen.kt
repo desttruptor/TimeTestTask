@@ -31,6 +31,8 @@ import androidx.navigation.NavHostController
 import com.pnvpnvpnv.timetesttask.R
 import com.pnvpnvpnv.timetesttask.presentation.navigation.Screen
 import com.pnvpnvpnv.timetesttask.presentation.ui.screens.city_time.models.CityTimeEffect
+import com.pnvpnvpnv.timetesttask.util.NAVIGATION_CITY_KEY
+import com.pnvpnvpnv.timetesttask.util.getValue
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
@@ -43,7 +45,11 @@ fun CityTimeScreen(
     val context = LocalContext.current
 
     LaunchedEffect(Unit) {
-        viewModel.startClock()
+        navController.currentBackStackEntryFlow.collectLatest {
+            it.savedStateHandle.getValue<String>(NAVIGATION_CITY_KEY) { timeZone ->
+                viewModel.startClock(timeZone)
+            }
+        }
     }
 
     LaunchedEffect(Unit) {

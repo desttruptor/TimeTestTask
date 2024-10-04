@@ -3,10 +3,9 @@ package com.pnvpnvpnv.timetesttask.presentation.ui.screens.city_list
 import androidx.navigation.NavController
 import com.pnvpnvpnv.timetesttask.domain.models.City
 import com.pnvpnvpnv.timetesttask.domain.usecases.GetCitiesUseCase
-import com.pnvpnvpnv.timetesttask.domain.usecases.SaveLastCityTimeZoneUseCase
 import com.pnvpnvpnv.timetesttask.presentation.ui.BaseViewModel
+import com.pnvpnvpnv.timetesttask.util.NAVIGATION_CITY_KEY
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -14,12 +13,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CityListViewModel @Inject constructor(
-    private val saveLastCityTimeZoneUseCase: SaveLastCityTimeZoneUseCase,
     private val getCitiesUseCase: GetCitiesUseCase,
     private val stateReducer: CityListStateReducer,
 ) : BaseViewModel() {
 
-    private var selectedJob: Job? = null
     private val _state = MutableStateFlow(stateReducer.initialState())
 
     val state = _state.asStateFlow()
@@ -37,10 +34,10 @@ class CityListViewModel @Inject constructor(
     }
 
     fun onCitySelected(city: City, navController: NavController) {
-        selectedJob?.cancel()
-        selectedJob = launch {
-            saveLastCityTimeZoneUseCase.executeOrThrow(city.timeZoneName)
-            navController.popBackStack()
-        }
+        navController.previousBackStackEntry?.savedStateHandle?.set(
+            NAVIGATION_CITY_KEY,
+            city.timeZoneName
+        )
+        navController.popBackStack()
     }
 }

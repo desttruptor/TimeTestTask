@@ -1,7 +1,7 @@
 package com.pnvpnvpnv.timetesttask.di
 
-import com.pnvpnvpnv.timetesttask.data.TimeRepositoryImpl
-import com.pnvpnvpnv.timetesttask.domain.repos.TimeRepository
+import com.pnvpnvpnv.timetesttask.data.repository.TimeRepositoryImpl
+import com.pnvpnvpnv.timetesttask.domain.repository.TimeRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

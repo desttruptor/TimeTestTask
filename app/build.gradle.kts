@@ -76,6 +76,7 @@ dependencies {
     implementation(libs.ktor.serialization.json)
     implementation(libs.kotlin.serialization)
     implementation(libs.datastore.preferences)
+    implementation(libs.androidx.navigation)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

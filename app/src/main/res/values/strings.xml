@@ -3,6 +3,11 @@
     <string name="bishkek">Бишкек</string>
     <string name="belgrade">Белград</string>
     <string name="berlin">Берлин</string>
-    <string name="ottawa">Ottawa</string>
-    <string name="johannesburg">Johannesburg</string>
+    <string name="ottawa">Оттава</string>
+    <string name="johannesburg">Йоханнесбург</string>
+    <string name="empty" />
+    <string name="change_other_city">Выбрать другую столицу</string>
+    <string name="network_error_occured">Произошла ошибка сети</string>
+    <string name="mapping_error_occured">Произошла ошибка сопоставления данных</string>
+    <string name="unknown_error_occured">Произошла неизвестная ошибка</string>
 </resources>

@@ -25,7 +25,7 @@ object NetworkModule {
             )
         }
         defaultRequest {
-            host = "https://www.timeapi.io/"
+            host = "www.timeapi.io"
             url { protocol = URLProtocol.HTTPS }
         }
     }

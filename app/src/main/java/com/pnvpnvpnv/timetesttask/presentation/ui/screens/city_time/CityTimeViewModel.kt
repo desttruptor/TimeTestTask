@@ -43,10 +43,6 @@ class CityTimeViewModel @Inject constructor(
 
     init {
         launch {
-            val lastCityTimeZone = getLastCityTimeZoneUseCase.execute(Unit).first()
-            startClock(lastCityTimeZone)
-        }
-        launch {
             errorEffectFlow.collectLatest {
                 when (it) {
                     is NetworkError -> _effect.send(CityTimeEffect.ShowError(R.string.network_error_occured))
@@ -57,11 +53,16 @@ class CityTimeViewModel @Inject constructor(
         }
     }
 
-    private fun startClock(timeZone: String?) {
+    fun startClock() {
         clockJob?.cancel()
         clockJob = launch {
             stopTickerUseCase.executeOrThrow(Unit)
 
+            _state.update {
+                stateReducer.showLoading()
+            }
+
+            val timeZone = getLastCityTimeZoneUseCase.execute(Unit).first()
             val cities = getCitiesUseCase.executeOrThrow(Unit)
             val city = timeZone?.let { tz ->
                 saveLastCityTimeZoneUseCase.executeOrThrow(tz)

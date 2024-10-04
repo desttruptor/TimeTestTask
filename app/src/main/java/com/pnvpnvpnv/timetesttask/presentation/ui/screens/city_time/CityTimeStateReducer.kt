@@ -10,6 +10,12 @@ class CityTimeStateReducer @Inject constructor() {
         isLoading = true
     )
 
+    fun showLoading() = CityTimeState(
+        cityNameRes = null,
+        cityTime = null,
+        isLoading = true
+    )
+
     fun showTimeAndCity(
         prevState: CityTimeState,
         city: Int,

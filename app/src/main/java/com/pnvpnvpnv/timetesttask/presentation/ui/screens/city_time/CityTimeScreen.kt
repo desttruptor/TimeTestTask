@@ -26,6 +26,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.pnvpnvpnv.timetesttask.R
 import com.pnvpnvpnv.timetesttask.presentation.navigation.Screen
@@ -34,12 +35,16 @@ import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun CityTimeScreen(
-    viewModel: CityTimeViewModel,
+    viewModel: CityTimeViewModel = hiltViewModel(),
     navController: NavHostController,
 ) {
     val uiState by viewModel.state.collectAsState()
     val snackbarHostState = remember { SnackbarHostState() }
     val context = LocalContext.current
+
+    LaunchedEffect(Unit) {
+        viewModel.startClock()
+    }
 
     LaunchedEffect(Unit) {
         viewModel.effect.collectLatest { effect ->

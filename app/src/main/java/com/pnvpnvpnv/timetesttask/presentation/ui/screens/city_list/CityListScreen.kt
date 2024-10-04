@@ -17,12 +17,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.pnvpnvpnv.timetesttask.domain.models.City
 
 @Composable
 fun CityListScreen(
-    viewModel: CityListViewModel,
+    viewModel: CityListViewModel = hiltViewModel(),
     navController: NavController,
 ) {
 

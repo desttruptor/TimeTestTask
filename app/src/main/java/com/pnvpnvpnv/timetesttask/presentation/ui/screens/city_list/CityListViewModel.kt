@@ -6,6 +6,7 @@ import com.pnvpnvpnv.timetesttask.domain.usecases.GetCitiesUseCase
 import com.pnvpnvpnv.timetesttask.domain.usecases.SaveLastCityTimeZoneUseCase
 import com.pnvpnvpnv.timetesttask.presentation.ui.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -18,6 +19,7 @@ class CityListViewModel @Inject constructor(
     private val stateReducer: CityListStateReducer,
 ) : BaseViewModel() {
 
+    private var selectedJob: Job? = null
     private val _state = MutableStateFlow(stateReducer.initialState())
 
     val state = _state.asStateFlow()
@@ -35,7 +37,8 @@ class CityListViewModel @Inject constructor(
     }
 
     fun onCitySelected(city: City, navController: NavController) {
-        launch {
+        selectedJob?.cancel()
+        selectedJob = launch {
             saveLastCityTimeZoneUseCase.executeOrThrow(city.timeZoneName)
             navController.popBackStack()
         }

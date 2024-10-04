@@ -24,6 +24,7 @@ class ClockTicker @Inject constructor(
             val formattedTime = timeFormatter.unixTimeToString(time)
             emit(formattedTime)
             delay(1000)
+            time++
         }
     }.flowOn(Dispatchers.Default)
 
